@@ -1,12 +1,12 @@
 import java.util.*;
 
-// Перерахування для типу студента
+// Enumeration for student type
 enum StudType {
     EXCELLENT,
     NORMAL
 }
 
-// Клас студента
+// Student class
 class Stud implements Cloneable {
     private int id;
     private int score;
@@ -30,7 +30,7 @@ class Stud implements Cloneable {
         return type;
     }
 
-    // Реалізація Prototype
+    // Implementing Prototype
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
@@ -42,14 +42,16 @@ class Stud implements Cloneable {
     }
 }
 
-// Інтерфейс для створювача студента
+// Interface for student builder
 interface StudBuilder {
     void setId(int id);
+
     void setScore(int score);
+
     Stud build();
 }
 
-// Відмінник
+// Excellent student builder
 class AStudBuilder implements StudBuilder {
     private int id;
     private int score;
@@ -67,7 +69,7 @@ class AStudBuilder implements StudBuilder {
     }
 }
 
-// Звичайний студент
+// Normal student builder
 class NormalStudBuilder implements StudBuilder {
     private int id;
     private int score;
@@ -85,7 +87,7 @@ class NormalStudBuilder implements StudBuilder {
     }
 }
 
-// Клас Director
+// Director class
 class Director {
     private StudBuilder builder;
 
@@ -100,12 +102,12 @@ class Director {
     }
 }
 
-// Інтерфейс для інтерпретатора
+// Interface for expression
 interface Expression {
     boolean interpret(String context);
 }
 
-// Клас для інтерпретації
+// Class for interpreting
 class TermExpression implements Expression {
     private String term;
 
@@ -118,17 +120,17 @@ class TermExpression implements Expression {
     }
 }
 
-// Інтерфейс для друку студента
+// Interface for student printer
 interface Printer {
     void print(Stud student);
 }
 
-// Інтерфейс для друку списку студентів
+// Interface for list printer
 interface StudListPrinter {
     void print(List<Stud> students);
 }
 
-// Адаптер для друку списку студентів
+// Adapter for printing list of students
 class PrinterAdapter implements StudListPrinter {
     public void print(List<Stud> students) {
         for (Stud student : students) {
@@ -137,12 +139,12 @@ class PrinterAdapter implements StudListPrinter {
     }
 }
 
-// Інтерфейс для декоратора
+// Interface for decorator
 interface StudentDecorator {
     void decorate();
 }
 
-// Декоратор для додаткової інформації
+// Decorator for additional information
 class StudDecorator implements StudentDecorator {
     private Stud student;
 
@@ -155,7 +157,7 @@ class StudDecorator implements StudentDecorator {
     }
 }
 
-// Ітератор для списку студентів
+// Iterator for student list
 class StudIterator implements Iterator<Stud> {
     private List<Stud> students;
     private int position;
@@ -173,7 +175,7 @@ class StudIterator implements Iterator<Stud> {
     }
 }
 
-// Головний клас
+// Main class
 public class Main {
     public static void main(String[] args) {
         List<Stud> ST = new ArrayList<>();
@@ -199,7 +201,7 @@ public class Main {
         PrinterAdapter printerAdapter = new PrinterAdapter();
         printerAdapter.print(ST);
 
-        // Використання ітератора
+        // Using iterator
         StudIterator iterator = new StudIterator(ST);
         while (iterator.hasNext()) {
             Stud student = iterator.next();
